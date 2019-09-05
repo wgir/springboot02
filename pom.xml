@@ -1,0 +1,173 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.6.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>springboot02</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>springboot02</name>
+	<description>Demo project for Spring Boot</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+		 <maven.compiler.source>${java.version}</maven.compiler.source> <!-- REQUIRED -->
+	     <maven.compiler.target>${java.version}</maven.compiler.target> <!-- REQUIRED -->
+	     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	     <appengine.maven.plugin>1.3.2</appengine.maven.plugin>
+	</properties>
+	
+	<!-- 
+	
+	<dependencyManagement>
+    <dependencies>
+      <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-gcp-dependencies</artifactId>
+      <version>1.0.0.RC1</version>
+      <type>pom</type>
+      <scope>import</scope>
+      </dependency>
+  </dependencies>
+</dependencyManagement>
+ -->
+		
+	<dependencies>
+	
+		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-gcp-starter-sql-postgresql -->
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-gcp-dependencies -->
+		<!-- 
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-gcp-starter-sql-postgresql</artifactId>
+		    <version>1.0.0.M2</version>
+		</dependency>
+ 		-->
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!-- 
+		 <dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-actuator</artifactId>
+    	</dependency>
+     -->
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        
+        
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
+      
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.modelmapper</groupId>
+		    <artifactId>modelmapper</artifactId>
+		    <version>2.3.2</version>
+		</dependency>
+		
+		<dependency>
+    		<groupId>io.jsonwebtoken</groupId>
+    		<artifactId>jjwt-api</artifactId>
+    		<version>0.10.5</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+    		<artifactId>jjwt-impl</artifactId>
+    		<version>0.10.5</version>
+    		<scope>runtime</scope>
+		</dependency>
+		<dependency>
+    		<groupId>io.jsonwebtoken</groupId>
+    		<artifactId>jjwt-jackson</artifactId>
+    		<version>0.10.5</version>
+    		<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+  			<groupId>org.amqphub.spring</groupId>
+  			<artifactId>amqp-10-jms-spring-boot-starter</artifactId>
+  			<version>2.1.2.redhat-00001</version>
+		</dependency>
+		
+		<!-- dependencias para google cloud sql -->
+		
+		<dependency>
+		    <groupId>com.google.apis</groupId>
+		    <artifactId>google-api-services-sqladmin</artifactId>
+		    <version>v1beta4-rev57-1.22.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.google.cloud.sql</groupId>
+		    <artifactId>postgres-socket-factory</artifactId>
+		    <version>1.0.8</version>
+		</dependency>
+		
+	</dependencies>
+
+	<build>
+	 	<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			
+			 <plugin>
+		        <groupId>com.google.appengine</groupId>
+		        <artifactId>appengine-maven-plugin</artifactId>
+		        <version>1.9.76</version>
+		      </plugin>
+		      
+		      <plugin>
+				  <groupId>com.google.cloud.tools</groupId>
+				  <artifactId>appengine-maven-plugin</artifactId>
+				  <version>2.1.0</version>
+				  <configuration>
+				  	<appId>tidy-generator-251320</appId>
+				  	<app.id>tidy-generator-251320-app</app.id>
+				    <project>tidy-generator-251320</project>
+				    <version>1</version>
+				    <gcloud_directory>/target</gcloud_directory>
+				  </configuration>
+			  </plugin>
+       		
+		</plugins>
+		
+		 <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        
+	</build>
+	
+	<repositories>
+		 <repository>
+		  <id>red-hat-ga</id>
+		  <url>https://maven.repository.redhat.com/ga</url>
+		 </repository>
+  </repositories>
+
+</project>

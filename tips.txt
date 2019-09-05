@@ -1,0 +1,3 @@
+#Para correr pruebas unitarias
+#bajar servidor tomcat en ambiente de desarrollo
+mvn test
