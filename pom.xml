@@ -145,9 +145,9 @@
 				  <artifactId>appengine-maven-plugin</artifactId>
 				  <version>2.1.0</version>
 				  <configuration>
-				  	<appId>tidy-generator-251320</appId>
-				  	<app.id>tidy-generator-251320-app</app.id>
-				    <project>tidy-generator-251320</project>
+				  	<appId>Xtidy-generator-251320</appId>
+				  	<app.id>Xtidy-generator-251320-app</app.id>
+				    <project>Xtidy-generator-251320</project>
 				    <version>1</version>
 				    <gcloud_directory>/target</gcloud_directory>
 				  </configuration>
