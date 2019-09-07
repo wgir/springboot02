@@ -1,12 +1,17 @@
 runtime: java
 env: flex
-
-runtime_config:  # Optional
-  jdk: openjdk8
+service: springboot02
 
 handlers:
-- url: /.*
-  script: this field is required, but ignored
-
+  - url: /.*
+    script: this field is required, but ignored
+    
 manual_scaling:
   instances: 1
+  
+readiness_check:
+    app_start_timeout_sec: 1800
+
+resources:
+  cpu: 1
+  memory_gb: 0.7
