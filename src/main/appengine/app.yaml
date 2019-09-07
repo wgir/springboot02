@@ -14,7 +14,7 @@ readiness_check:
 
 resources:
   cpu: 1
-  memory_gb: 2
+  memory_gb: 4
   
 beta_settings:
       cloud_sql_instances: "my-project-4-19763:us-central1:springboot02"
