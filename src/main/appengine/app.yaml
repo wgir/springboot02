@@ -14,4 +14,4 @@ readiness_check:
 
 resources:
   cpu: 1
-  memory_gb: 0.7
+  memory_gb: 1
