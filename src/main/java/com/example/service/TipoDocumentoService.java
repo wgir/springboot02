@@ -1,42 +1,38 @@
 package com.example.service;
 
 import java.text.ParseException;
-import java.util.List;
-import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
 
 import com.example.constantes.Constantes;
-import com.example.dto.ContactoDto;
-import com.example.dto.ContactoDtoResponse;
-import com.example.dto.ContactoDtoValidator;
-import com.example.entities.Contacto;
-import com.example.repository.ContactoRepository;
+import com.example.dto.TipoDocumentoDto;
+import com.example.dto.TipoDocumentoDtoResponse;
+import com.example.dto.TipoDocumentoDtoValidator;
+import com.example.entities.TipoDocumento;
+import com.example.repository.TipoDocumentoRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Service
-//@EnableJpaRepositories("com.example.repository")
-public class ContactoService implements IContactoService {
+public class TipoDocumentoService implements ITipoDocumentoService {
 	@Autowired
-	ContactoRepository dao;
+	TipoDocumentoRepository dao;
 
 	@Autowired
 	 private ModelMapper modelMapper;
 	
 	@Autowired
-	 private ContactoDtoValidator validador;
+	 private TipoDocumentoDtoValidator validador;
 	// (3)
 	
-	public ContactoDtoResponse validarEntidad(ContactoDto objDto)
+	public TipoDocumentoDtoResponse validarEntidad(TipoDocumentoDto objDto)
 	 {
-			ContactoDtoResponse respuesta=new ContactoDtoResponse(Constantes.ERROR,"");
-			BindException result = new BindException(objDto,"contactoDto");
+			TipoDocumentoDtoResponse respuesta=new TipoDocumentoDtoResponse(Constantes.ERROR,"");
+			BindException result = new BindException(objDto,"tipoDocumentoDto");
 			validador.validate(objDto,result);
 	    	if (result.hasErrors()) {
 			    respuesta.setEstado(Constantes.ERROR_VALIDACION);
@@ -46,15 +42,15 @@ public class ContactoService implements IContactoService {
 	    	return respuesta;
 	 }
 	
-	 public ContactoDtoResponse save(ContactoDto objDto){
-			Contacto obj=null;
-			ContactoDtoResponse respuesta=validarEntidad(objDto);
+	 public TipoDocumentoDtoResponse save(TipoDocumentoDto objDto){
+			TipoDocumento obj=null;
+			TipoDocumentoDtoResponse respuesta=validarEntidad(objDto);
 			if(respuesta.getEstado()!=Constantes.ERROR_VALIDACION)
 	    	{
 		    	try {
 		    			obj=this.convertToEntity(objDto);
 		    			obj=dao.save(obj);
-		    			respuesta.setContactoDto(dao.getContactoById(obj.getId()));
+		    			respuesta.setTipoDocumentoDto(dao.getTipoDocumentoById(obj.getId()));
 		    			respuesta.setEstado(Constantes.OK);
 		    		}catch(Exception e){
 		    			respuesta.setMensaje(e.getMessage());
@@ -63,11 +59,11 @@ public class ContactoService implements IContactoService {
 	    	return respuesta;
 		}
     
-    public ContactoDtoResponse getAll()
+    public TipoDocumentoDtoResponse getAll()
     {
-    	ContactoDtoResponse respuesta=new ContactoDtoResponse(Constantes.ERROR,"");
+    	TipoDocumentoDtoResponse respuesta=new TipoDocumentoDtoResponse(Constantes.ERROR,"");
     	try {
-    		respuesta.setContactoDto(dao.getAll());
+    		respuesta.setTipoDocumentoDto(dao.getAll());
     		respuesta.setEstado(Constantes.OK);
 		}catch(Exception e){
 			respuesta.setMensaje(e.getMessage());
@@ -77,11 +73,11 @@ public class ContactoService implements IContactoService {
     
 	
 	@JsonIgnore
-	public ContactoDtoResponse get(Long id)
+	public TipoDocumentoDtoResponse get(int id)
 	{
-    	ContactoDtoResponse respuesta=new ContactoDtoResponse(Constantes.ERROR,"");
+    	TipoDocumentoDtoResponse respuesta=new TipoDocumentoDtoResponse(Constantes.ERROR,"");
 		try {
-				respuesta.setContactoDto(dao.getContactoById(id));
+				respuesta.setTipoDocumentoDto(dao.getTipoDocumentoById(id));
 				respuesta.setEstado(Constantes.OK);
 			}catch(Exception e){
 				respuesta.setMensaje(e.getMessage());
@@ -90,15 +86,15 @@ public class ContactoService implements IContactoService {
 	}
 	
 	
-	private Contacto convertToEntity(ContactoDto objDto) throws ParseException {
-	    Contacto obj = modelMapper.map(objDto, Contacto.class);
+	private TipoDocumento convertToEntity(TipoDocumentoDto objDto) throws ParseException {
+		TipoDocumento obj = modelMapper.map(objDto, TipoDocumento.class);
 	    //obj.setTipoDocumento(new TipoDocumento(objDto.getTipoDocumentoId(),""));
 	  
 	    return obj;
 	}
 	
-	private ContactoDto convertToDto(Contacto obj) {
-		ContactoDto objDto = modelMapper.map(obj, ContactoDto.class);
+	private TipoDocumentoDto convertToDto(TipoDocumento obj) {
+		TipoDocumentoDto objDto = modelMapper.map(obj, TipoDocumentoDto.class);
 	    return objDto;
 	}
 

@@ -1,12 +1,14 @@
 package com.example.springboot02;
 
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.dto.ContactoDtoResponse;
+import com.example.dto.TipoDocumentoDto;
+import com.example.dto.TipoDocumentoDtoResponse;
 import com.example.constantes.Constantes;
 import com.example.dto.ContactoDto;
 
@@ -23,7 +27,8 @@ import com.example.dto.ContactoDto;
 @ContextConfiguration(classes = SpringBoot02Application.class) 
 //@TestPropertySource(value={"classpath:application.properties"})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class ContactoApiTest {
+@Order(value = 0)
+public class TipoDocumentoApiTest {
 	
 	 @Autowired
 	 private TestRestTemplate restTemplate;
@@ -32,7 +37,7 @@ public class ContactoApiTest {
 	 private int port;
 
 	 private String getRootUrl() {
-	    return "http://localhost:" + port + "/api/contacto";
+	    return "http://localhost:" + port + "/api/tipodocumento";
 	 }
 
 	 HttpHeaders headers = new HttpHeaders();
@@ -43,34 +48,30 @@ public class ContactoApiTest {
 	 }
 	
 	 @Test
-	 public void testGetAllContacts() {
-			ResponseEntity<ContactoDtoResponse> response = restTemplate.getForEntity(getRootUrl()+"/contactos", ContactoDtoResponse.class);
-	        //ResponseEntity<String> response = restTemplate.exchange(getRootUrl() + "/personas",HttpMethod.GET, entity, String.class);
+	 public void testGetAll() {
+			ResponseEntity<TipoDocumentoDtoResponse> response = restTemplate.getForEntity(getRootUrl()+"/tiposdocumentos", TipoDocumentoDtoResponse.class);
 	        Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
 	        Assert.assertEquals(Constantes.OK, response.getBody().getEstado());
 	 }
 	 
 	 
 	 @Test
-	 public void testAddContacto() {
-		 	ResponseEntity<ContactoDtoResponse> response = restTemplate.getForEntity(getRootUrl() + "/contactos", ContactoDtoResponse.class);
-		 	int cant=response.getBody().getContactoDto().size()+1;
-		 	ContactoDto obj = new ContactoDto((long) 0,Integer.toString(cant),"nombre "+Integer.toString(cant),"apellido "+Integer.toString(cant));
+	 public void testAdd() {
+		 	ResponseEntity<TipoDocumentoDtoResponse> response = restTemplate.getForEntity(getRootUrl() + "/tiposdocumentos", TipoDocumentoDtoResponse.class);
+		 	int cant=response.getBody().getTipoDocumentoDto().size()+1;
+		 	TipoDocumentoDto obj = new TipoDocumentoDto((int) 0,"glosa "+Integer.toString(cant));
 		 	
-		    response = restTemplate.postForEntity(getRootUrl() + "/contactos", obj, ContactoDtoResponse.class);
+		    response = restTemplate.postForEntity(getRootUrl() + "/tiposdocumentos", obj, TipoDocumentoDtoResponse.class);
 		    Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
 	        Assert.assertEquals(Constantes.OK, response.getBody().getEstado());
-	        Assert.assertEquals(obj.getFirstName(),response.getBody().getContactoDto().get(0).getFirstName());
+	        Assert.assertEquals(obj.getGlosa(),response.getBody().getTipoDocumentoDto().get(0).getGlosa());
 	        
-	        
-		 	obj.setDocumento(Integer.toString(cant));
-		 	obj.setFirstName("nombre "+Integer.toString(cant));
-		 	obj.setLastName("apellido "+Integer.toString(cant));
-		 	response = restTemplate.postForEntity(getRootUrl() + "/contactos", obj, ContactoDtoResponse.class);
+	        obj.setId(response.getBody().getTipoDocumentoDto().get(0).getId());
+		 	response = restTemplate.getForEntity(getRootUrl() + "/tiposdocumentos/"+obj.getId(), TipoDocumentoDtoResponse.class);
 		    Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
-	        Assert.assertEquals(Constantes.ERROR_VALIDACION, response.getBody().getEstado());
-	        
-	        
+	       // Assert.assertEquals(Constantes.ERROR_VALIDACION, response.getBody().getEstado());
+	        Assert.assertEquals(obj.getGlosa(),response.getBody().getTipoDocumentoDto().get(0).getGlosa());
+        
 	 }
 	
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.example.dto.PersonaDto;
 import com.example.entities.Persona;
 @Repository 
-@EnableJpaRepositories("com.example.dto")
+//@EnableJpaRepositories("com.example.dto")
 
 public interface PersonaRepository extends JpaRepository<Persona, Long>{
 	

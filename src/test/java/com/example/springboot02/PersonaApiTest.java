@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -23,7 +24,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.example.dto.Constantes;
+import com.example.constantes.Constantes;
 import com.example.dto.PersonaDto;
 import com.example.dto.PersonaDtoResponse;
 
@@ -31,6 +32,7 @@ import com.example.dto.PersonaDtoResponse;
 @ContextConfiguration(classes = SpringBoot02Application.class) 
 //@TestPropertySource(value={"classpath:application.properties"})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@Order(value = 1)
 public class PersonaApiTest {
 	
 	 @Autowired
@@ -40,7 +42,7 @@ public class PersonaApiTest {
 	 private int port;
 
 	 private String getRootUrl() {
-	    return "http://localhost:" + port + "/api/";
+	    return "http://localhost:" + port + "/api/persona";
 	 }
 
 	 HttpHeaders headers = new HttpHeaders();

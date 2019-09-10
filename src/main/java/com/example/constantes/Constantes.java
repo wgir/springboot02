@@ -1,4 +1,4 @@
-package com.example.dto;
+package com.example.constantes;
 
 public final class Constantes {
 	 // The default score assigned to this card, if not

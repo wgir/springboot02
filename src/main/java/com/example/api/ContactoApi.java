@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.dto.Constantes;
+import com.example.constantes.Constantes;
 import com.example.dto.ContactoDto;
 import com.example.dto.ContactoDtoResponse;
 import com.example.service.IContactoService;
 
 @RestController
-@RequestMapping(value="/api")
+@RequestMapping(value="/api/contacto")
 public class ContactoApi {
 	
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.example.dto.ContactoDto;
 import com.example.entities.Contacto;
 @Repository 
-@EnableJpaRepositories("com.example.dto")
+//@EnableJpaRepositories("com.example.dto")
 
 public interface ContactoRepository extends JpaRepository<Contacto, Long>{
 	

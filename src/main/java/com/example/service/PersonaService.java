@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
 
-import com.example.dto.Constantes;
+import com.example.constantes.Constantes;
 import com.example.dto.PersonaDto;
 import com.example.dto.PersonaDtoResponse;
 import com.example.dto.PersonaDtoValidator;

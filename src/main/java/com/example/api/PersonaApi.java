@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.example.dto.Constantes;
+import com.example.constantes.Constantes;
 import com.example.dto.PersonaDto;
 import com.example.dto.PersonaDtoResponse;
 import com.example.service.IPersonaService;
@@ -25,11 +24,11 @@ import com.example.service.IPersonaService;
 
 
 @RestController
-@RequestMapping(value="/api")
+@RequestMapping(value="/api/persona")
 public class PersonaApi {
 	
 	
-	private static final Logger LOG = LogManager.getLogger(PersonaApi.class);
+	//private static final Logger LOG = LogManager.getLogger(PersonaApi.class);
 
 	@Autowired
 	IPersonaService service;
@@ -40,8 +39,7 @@ public class PersonaApi {
 	//@ApiOperation(value = "Fetches all persons in the database.", response = PersonaDtoResponse.class)
 	@GetMapping({"/personas"})
 	public PersonaDtoResponse get() { //@PathVariable(required = false) String id){
-		//LOG.info("Id:"+id);
-	        return service.getAll();
+		     return service.getAll();
     }
 	 
 	//@RequestMapping(value="/persona", method=RequestMethod.POST)

@@ -1,3 +1,12 @@
 #Para correr pruebas unitarias
 #bajar servidor tomcat en ambiente de desarrollo
 mvn test
+
+
+#Error: Could not find or load main class
+#desde la linea de comando se ejecuta
+mvn clean install
+
+
+#cuando no refleja los cambios en codigo
+mvn clean spring-boot:run
