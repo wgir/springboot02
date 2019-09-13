@@ -1,9 +1,6 @@
 package com.example.service;
 
-import java.text.ParseException;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
@@ -14,22 +11,27 @@ import com.example.dto.PersonaDtoResponse;
 import com.example.dto.PersonaDtoValidator;
 import com.example.entities.Persona;
 import com.example.repository.PersonaRepository;
+import com.example.util.Mapeo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Service
 //@EnableJpaRepositories("com.example.repository")
 public class PersonaService implements IPersonaService {
+	
+	
 	@Autowired
 	PersonaRepository dao;
 
-	
+	/*
 	 @Autowired
 	 private ModelMapper modelMapper;
-	 
+	 */
 	 @Autowired
 	 private PersonaDtoValidator validador;
 	 
+	 @Autowired
+	 private Mapeo maper;
 	 
 	 public PersonaDtoResponse validarEntidad(PersonaDto objDto)
 	 {
@@ -45,12 +47,12 @@ public class PersonaService implements IPersonaService {
 	 }
 	
 	 public PersonaDtoResponse save(PersonaDto objDto){
-		Persona obj=null;
+		Persona obj=new Persona();
 		PersonaDtoResponse respuesta=validarEntidad(objDto);
 		if(respuesta.getEstado()!=Constantes.ERROR_VALIDACION)
     	{
 	    	try {
-	    			obj = this.convertToEntity(objDto);
+	    			obj = (Persona)maper.convertToEntity(objDto,obj);
 	    			obj=dao.save(obj);
 	    			respuesta.setPersonaDto(dao.getPersonaById(obj.getId()));
 	    			respuesta.setEstado(Constantes.OK);
@@ -90,21 +92,20 @@ public class PersonaService implements IPersonaService {
     @Override
 	public PersonaDtoResponse update(Long id, PersonaDto objDto) {
 		// TODO Auto-generated method stub
-    	Persona obj=null;
+    	Persona obj=new Persona();
     	PersonaDtoResponse respuesta=validarEntidad(objDto);
     	if(respuesta.getEstado()!=Constantes.ERROR_VALIDACION)
     	{
     		try {
-    			obj = this.convertToEntity(objDto);
+    			obj = (Persona) maper.convertToEntity(objDto,obj);
 	    		Persona p=dao.findById(id).get();
 				if(p!=null)
 				{
 	    				p.setFirstName(objDto.getFirstName());
 	    				p.setLastName(objDto.getLastName());
-	    				//p.setTipoDocumento(new TipoDocumento(objDto.getTipoDocumentoId(),""));
 	    				p.setEmail(objDto.getEmail());
 	    				p.setPhoneNumber(objDto.getPhoneNumber());
-	    				respuesta.addPersonaDto(convertToDto(dao.save(obj)));
+	    				respuesta.addPersonaDto((PersonaDto) maper.convertToDto(dao.save(obj),objDto));
 		    			respuesta.setEstado(Constantes.OK);	
 				}else
 					{
@@ -122,17 +123,6 @@ public class PersonaService implements IPersonaService {
     	
 		
 	}
-	
-    private Persona convertToEntity(PersonaDto objDto) throws ParseException {
-	    Persona obj = modelMapper.map(objDto, Persona.class);
-	    //obj.setTipoDocumento(new TipoDocumento(objDto.getTipoDocumentoId(),""));
-	  
-	    return obj;
-	}
-	
-	private PersonaDto convertToDto(Persona obj) {
-		PersonaDto objDto = modelMapper.map(obj, PersonaDto.class);
-	    return objDto;
-	}
+	   
 	
 }

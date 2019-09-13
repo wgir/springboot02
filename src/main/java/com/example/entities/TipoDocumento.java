@@ -1,6 +1,7 @@
 package com.example.entities;
 // Generated 14-05-2019 09:58:12 by Hibernate Tools 5.1.10.Final
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -27,21 +28,24 @@ public class TipoDocumento implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String glosa;
+	private int createdby;
 	private Set<Persona> personas = new HashSet<Persona>(0);
-
+	
+    	
+    @Column(name = "createdon")
+    private Calendar createdOn;
+    
 	public TipoDocumento() {
 	}
+
+	
 
 	public TipoDocumento(String glosa, Set<Persona> personas) {
 		this.glosa = glosa;
 		this.personas = personas;
 	}
-	/*
-	public TipoDocumento(int id,String glosa)
-	{
-		this.id=id;
-		this.glosa=glosa;
-	}*/
+	
+	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
@@ -62,6 +66,26 @@ public class TipoDocumento implements java.io.Serializable {
 	public void setGlosa(String glosa) {
 		this.glosa = glosa;
 	}
+	
+	
+	@Column(name = "createdby")
+	public int getCreatedby() {
+		return createdby;
+	}
+
+	public void setCreatedby(int createdby) {
+		this.createdby = createdby;
+	}
+
+	
+	public Calendar getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(Calendar createdOn) {
+		this.createdOn = createdOn;
+	}
+	
     
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoDocumento")
@@ -77,5 +101,9 @@ public class TipoDocumento implements java.io.Serializable {
 	public String toString() {
 		return "TipoDocumento [id=" + id + ", glosa=" + glosa + "]";
 	}
+	
+	
+
+	
 
 }

@@ -1,7 +1,6 @@
 package com.example.springboot02;
 
 import org.junit.Assert;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.example.dto.ContactoDtoResponse;
 import com.example.dto.TipoDocumentoDto;
 import com.example.dto.TipoDocumentoDtoResponse;
 import com.example.constantes.Constantes;
-import com.example.dto.ContactoDto;
 
 
 @RunWith(SpringRunner.class)

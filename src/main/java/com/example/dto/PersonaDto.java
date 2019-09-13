@@ -1,6 +1,9 @@
 package com.example.dto;
 
-public class PersonaDto {
+
+
+
+public class PersonaDto implements _DTOEntity {
 	private Long id;
 	private int tipoDocumentoId;
 	private String glosaTipoDocumento;

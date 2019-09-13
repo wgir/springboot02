@@ -1,12 +1,10 @@
 package com.example.service;
 
 import java.text.ParseException;
-import java.util.List;
-import java.util.Optional;
+
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
@@ -21,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Service
-//@EnableJpaRepositories("com.example.repository")
 public class ContactoService implements IContactoService {
 	@Autowired
 	ContactoRepository dao;
@@ -89,6 +86,40 @@ public class ContactoService implements IContactoService {
 		return respuesta;
 	}
 	
+	
+	@Override
+	public ContactoDtoResponse update(Long id, ContactoDto objDto) {
+		// TODO Auto-generated method stub
+    	Contacto obj=null;
+    	ContactoDtoResponse respuesta=validarEntidad(objDto);
+    	if(respuesta.getEstado()!=Constantes.ERROR_VALIDACION)
+    	{
+    		try {
+    			obj = this.convertToEntity(objDto);
+    			Contacto p=dao.findById(id).get();
+				if(p!=null)
+				{
+	    				p.setFirstName(objDto.getFirstName());
+	    				p.setLastName(objDto.getLastName());
+	    				//p.setTipoDocumento(new TipoDocumento(objDto.getTipoDocumentoId(),""));
+	    				respuesta.addContactoDto(convertToDto(dao.save(obj)));
+		    			respuesta.setEstado(Constantes.OK);	
+				}else
+					{
+						respuesta.setEstado(Constantes.ERROR_VALIDACION);
+						respuesta.setMensaje("Id no encontrado:"+id);
+					}
+				
+	    		}catch(Exception e){
+	    			respuesta.setMensaje(e.getMessage());
+	    		}
+			
+	
+    	}
+    	return respuesta;
+    	
+		
+	}
 	
 	private Contacto convertToEntity(ContactoDto objDto) throws ParseException {
 	    Contacto obj = modelMapper.map(objDto, Contacto.class);

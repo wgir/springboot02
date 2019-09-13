@@ -23,6 +23,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "Persona")
 public class Persona implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private TipoDocumento tipoDocumento;
 	@NotNull
@@ -31,6 +35,7 @@ public class Persona implements java.io.Serializable {
 	private String lastName;
 	private String phoneNumber;
 	private String email;
+	
 
 	public Persona() {
 	}
