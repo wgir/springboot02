@@ -1,15 +1,11 @@
 package com.example.dto;
 
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
-
-import com.example.repository.PersonaRepository;
 import com.example.repository.TipoDocumentoRepository;
 
 @Component

@@ -3,6 +3,10 @@ package com.example.event;
 import java.io.Serializable;
 
 public class MensajeEvent implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int Id;
 	private String mensaje;
 	
