@@ -82,7 +82,7 @@ public class TipoDocumentoService implements ITipoDocumentoService {
     
 	
 	@JsonIgnore
-	public TipoDocumentoDtoResponse get(int id)
+	public TipoDocumentoDtoResponse get(Long id)
 	{
     	TipoDocumentoDtoResponse respuesta=new TipoDocumentoDtoResponse(Constantes.ERROR,"");
 		try {

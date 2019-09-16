@@ -101,10 +101,12 @@ public class PersonaService implements IPersonaService {
 	    		Persona p=dao.findById(id).get();
 				if(p!=null)
 				{
-	    				p.setFirstName(objDto.getFirstName());
-	    				p.setLastName(objDto.getLastName());
+	    				p.setDocumento(objDto.getDocumento());
+	    				p.setNombres(objDto.getNombres());
+	    				p.setApellidos(objDto.getApellidos());
 	    				p.setEmail(objDto.getEmail());
-	    				p.setPhoneNumber(objDto.getPhoneNumber());
+	    				p.setSexo(objDto.getSexo());
+	    				p.setFechaNacimiento(objDto.getFechaNacimiento());
 	    				respuesta.addPersonaDto((PersonaDto) maper.convertToDto(dao.save(obj),objDto));
 		    			respuesta.setEstado(Constantes.OK);	
 				}else

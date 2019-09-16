@@ -6,11 +6,19 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
+
+import java.util.Calendar;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.eclipse.persistence.annotations.Customizer;
+
+import com.example.config.ColumnPosition;
+import com.example.config.EntityColumnPositionCustomizer;
 
 
 /**
@@ -18,41 +26,61 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "Persona")
-public class Persona implements java.io.Serializable {
+@Customizer(EntityColumnPositionCustomizer.class)
+public class Persona extends _BaseEntity {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+		
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
+	@ColumnPosition(position = 0) 
 	private Long id;
-	private TipoDocumento tipoDocumento;
-	@NotNull
-	//@Size(min=2, message="firstName should have atleast 2 characters")
-	private String firstName;
-	private String lastName;
-	private String phoneNumber;
+	
+	
+	@Column(name = "documento")
+	@ColumnPosition(position = 1) 
+	private int documento;
+	
+	@Column(name = "nombres")
+	@ColumnPosition(position = 2)
+	private String nombres;
+	
+	@Column(name = "apellidos")
+	@ColumnPosition(position = 3)
+	private String apellidos;
+	
+	@Column(name = "sexo")
+	@ColumnPosition(position = 4)
+	private String sexo;
+	
+	@Column(name = "email")
+	@ColumnPosition(position = 5)
 	private String email;
+	
+	@Column(name = "fechaNacimiento")
+	@ColumnPosition(position = 6)
+	private Calendar fechaNacimiento;
 	
 
 	public Persona() {
 	}
 
-	public Persona(TipoDocumento tipoDocumento) {
-		this.tipoDocumento = tipoDocumento;
-	}
+	
 
-	public Persona(TipoDocumento tipoDocumento, String firstName, String lastName, String phoneNumber, String email) {
-		this.tipoDocumento = tipoDocumento;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phoneNumber = phoneNumber;
+	public Persona(int documento, String nombres, String apellidos, String sexo, String email,Calendar fechaNacimiento) {
+		this.documento = documento;
+		this.nombres = nombres;
+		this.apellidos = apellidos;
+		this.sexo = sexo;
 		this.email = email;
+		this.fechaNacimiento=fechaNacimiento;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	
 
-	@Column(name = "id", unique = true, nullable = false)
 	public Long getId() {
 		return this.id;
 	}
@@ -60,52 +88,51 @@ public class Persona implements java.io.Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 
 	//@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TipoDocumentoId", nullable = false)
-	public TipoDocumento getTipoDocumento() {
-		return this.tipoDocumento;
+	
+	public int getDocumento() {
+		return this.documento;
 	}
 
 	@Override
 	public String toString() {
-		return "Persona [id=" + id + ", tipoDocumento=" + tipoDocumento.toString() + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", phoneNumber=" + phoneNumber + ", email=" + email + "]";
+		return "Persona [id=" + this.getId() + ", documento=" + this.getDocumento() + ", nombres=" + nombres + ", lastName="
+				+ apellidos + ", sexo=" + sexo + ", email=" + email + "]";
 	}
 
-	public void setTipoDocumento(TipoDocumento tipoDocumento) {
-		this.tipoDocumento = tipoDocumento;
+	public void setDocumento(int documento) {
+		this.documento = documento;
 	}
 
-	@Column(name = "firstName")
-	public String getFirstName() {
-		return this.firstName;
+	
+	public String getNombres() {
+		return this.nombres;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
 	}
 
-	@Column(name = "lastName")
-	public String getLastName() {
-		return this.lastName;
+	
+	public String getApellidos() {
+		return this.apellidos;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
 	}
 
-	@Column(name = "phoneNumber")
-	public String getPhoneNumber() {
-		return this.phoneNumber;
+	
+	public String getSexo() {
+		return this.sexo;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 
-	@Column(name = "email")
 	public String getEmail() {
 		return this.email;
 	}
@@ -113,5 +140,16 @@ public class Persona implements java.io.Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public Calendar getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+
+
+	public void setFechaNacimiento(Calendar fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
 
 }

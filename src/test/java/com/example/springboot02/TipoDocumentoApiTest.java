@@ -56,7 +56,7 @@ public class TipoDocumentoApiTest {
 	 public void testAdd() {
 		 	ResponseEntity<TipoDocumentoDtoResponse> response = restTemplate.getForEntity(getRootUrl() + "/tiposdocumentos", TipoDocumentoDtoResponse.class);
 		 	int cant=response.getBody().getTipoDocumentoDto().size()+1;
-		 	TipoDocumentoDto obj = new TipoDocumentoDto((int) 0,"glosa "+Integer.toString(cant));
+		 	TipoDocumentoDto obj = new TipoDocumentoDto( (long) 0,"glosa "+Integer.toString(cant));
 		 	
 		    response = restTemplate.postForEntity(getRootUrl() + "/tiposdocumentos", obj, TipoDocumentoDtoResponse.class);
 		    Assert.assertEquals(HttpStatus.OK,response.getStatusCode());

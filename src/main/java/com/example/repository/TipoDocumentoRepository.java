@@ -23,5 +23,5 @@ public interface TipoDocumentoRepository extends JpaRepository<TipoDocumento, Lo
 	 
 	 
 	 @Query(value=queryAll+" and t.id=?1")
-	 public List<TipoDocumentoDto> getTipoDocumentoById(int id);
+	 public List<TipoDocumentoDto> getTipoDocumentoById(Long id);
 }

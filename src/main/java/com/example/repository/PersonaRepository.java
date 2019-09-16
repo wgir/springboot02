@@ -11,10 +11,9 @@ import com.example.entities.Persona;
 
 public interface PersonaRepository extends JpaRepository<Persona, Long>{
 	
-	String queryAll="select new com.example.dto.PersonaDto(p.id,p.tipoDocumento.id,td.glosa," + 
-	 		"p.firstName,p.lastName,p.phoneNumber,p.email)" + 
-	 		" from   Persona p, TipoDocumento  td" + 
-	 		" where p.tipoDocumento.id=td.id";
+	String queryAll="select new com.example.dto.PersonaDto(p.id,p.documento," + 
+	 		"p.nombres,p.apellidos,p.sexo,p.email,p.fechaNacimiento)" + 
+	 		" from   Persona p where 1=1";
 	
 	 @Query(value=queryAll)
 	 public List<PersonaDto> getAll();

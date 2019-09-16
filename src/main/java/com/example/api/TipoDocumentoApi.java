@@ -40,7 +40,7 @@ public class TipoDocumentoApi {
 	
     
 	@RequestMapping(value="/tiposdocumentos/{id}", produces = "application/json",method=RequestMethod.GET)
-	public ResponseEntity<TipoDocumentoDtoResponse> getOne(@PathVariable("id") int id){
+	public ResponseEntity<TipoDocumentoDtoResponse> getOne(@PathVariable("id") Long id){
 		TipoDocumentoDtoResponse respuesta=service.get(id);
 		return new ResponseEntity<TipoDocumentoDtoResponse>(respuesta, respuesta.getEstado() == Constantes.NOT_FOUND ?  HttpStatus.NOT_FOUND : HttpStatus.OK);
     }

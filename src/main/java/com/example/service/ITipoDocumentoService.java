@@ -8,6 +8,6 @@ public interface ITipoDocumentoService {
 	
 	 public TipoDocumentoDtoResponse save(TipoDocumentoDto obj);
 	 public TipoDocumentoDtoResponse getAll();
-	 public TipoDocumentoDtoResponse get(int id);
+	 public TipoDocumentoDtoResponse get(Long id);
 	
 }

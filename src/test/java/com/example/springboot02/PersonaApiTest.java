@@ -63,17 +63,21 @@ public class PersonaApiTest {
 	 
 	 @Test
 	 public void testAddPersona() {
+		 	
+		 	ResponseEntity<PersonaDtoResponse> response = restTemplate.getForEntity(getRootUrl()+"/personas", PersonaDtoResponse.class);
+		 	int cant=response.getBody().getPersonaDto().size();
 		 	PersonaDto obj = new PersonaDto();
-		 	obj.setFirstName("nombre 1");
-		 	obj.setTipoDocumentoId(1);
-		 	obj.setLastName("apellido");
-		 	obj.setEmail("xxx@gmail.com");
-		 	obj.setPhoneNumber("111111");
+		 	obj.setId((long) 0);
+		 	obj.setNombres("nombre "+(cant+1));
+		 	obj.setDocumento(0);
+		 	obj.setApellidos("apellido "+(cant+1));
+		 	obj.setEmail("xxx"+(cant+1)+"@gmail.com");
+		 	
 
-		    ResponseEntity<PersonaDtoResponse> response = restTemplate.postForEntity(getRootUrl() + "/personas", obj, PersonaDtoResponse.class);
+		    response = restTemplate.postForEntity(getRootUrl() + "/personas", obj, PersonaDtoResponse.class);
 		    Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
 	        Assert.assertEquals(Constantes.OK, response.getBody().getEstado());
-	        Assert.assertEquals(obj.getFirstName(),response.getBody().getPersonaDto().get(0).getFirstName());
+	        Assert.assertEquals(obj.getNombres(),response.getBody().getPersonaDto().get(0).getNombres());
 	        
 	 }
 	/*

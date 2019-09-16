@@ -8,13 +8,13 @@ package com.example.dto;
 
 public class TipoDocumentoDto implements _DTOEntity {
 
-	private int id;
+	private Long id;
 	private String glosa;
 	
 
 	//public ContactoDto() {	}
 
-	public TipoDocumentoDto(int id,String glosa) {
+	public TipoDocumentoDto(Long id,String glosa) {
 		this.id=id;
 		this.glosa = glosa;
 		
@@ -22,11 +22,11 @@ public class TipoDocumentoDto implements _DTOEntity {
 	}
 
 	
-	public int getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

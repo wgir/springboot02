@@ -13,6 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.eclipse.persistence.annotations.Customizer;
+
+import com.example.config.ColumnPosition;
+import com.example.config.EntityColumnPositionCustomizer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -20,45 +24,55 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @Table(name = "TipoDocumento")
-public class TipoDocumento implements java.io.Serializable {
+@Customizer(EntityColumnPositionCustomizer.class)
+public class TipoDocumento extends _BaseEntity implements java.io.Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Integer id;
-	private String glosa;
-	private int createdby;
-	private Set<Persona> personas = new HashSet<Persona>(0);
 	
-    	
+	
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
+	@ColumnPosition(position = 0) 
+	private Long id;
+	
+	
+	@Column(name = "glosa", length = 50)
+	@ColumnPosition(position = 1) 
+	private String glosa;
+	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoDocumento")
+	private Set<Persona2> personas = new HashSet<Persona2>(0);
+	
+    /*	
     @Column(name = "createdon")
     private Calendar createdOn;
-    
+    */
 	public TipoDocumento() {
 	}
 
 	
 
-	public TipoDocumento(String glosa, Set<Persona> personas) {
+	public TipoDocumento(String glosa, Set<Persona2> personas) {
 		this.glosa = glosa;
 		this.personas = personas;
 	}
 	
 	
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	@Column(name = "glosa", length = 50)
+	
 	public String getGlosa() {
 		return this.glosa;
 	}
@@ -67,39 +81,19 @@ public class TipoDocumento implements java.io.Serializable {
 		this.glosa = glosa;
 	}
 	
+	   
 	
-	@Column(name = "createdby")
-	public int getCreatedby() {
-		return createdby;
-	}
-
-	public void setCreatedby(int createdby) {
-		this.createdby = createdby;
-	}
-
-	
-	public Calendar getCreatedOn() {
-		return createdOn;
-	}
-
-	public void setCreatedOn(Calendar createdOn) {
-		this.createdOn = createdOn;
-	}
-	
-    
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoDocumento")
-	public Set<Persona> getPersonas() {
+	public Set<Persona2> getPersonas() {
 		return this.personas;
 	}
 
-	public void setPersonas(Set<Persona> personas) {
+	public void setPersonas(Set<Persona2> personas) {
 		this.personas = personas;
 	}
 
 	@Override
 	public String toString() {
-		return "TipoDocumento [id=" + id + ", glosa=" + glosa + "]";
+		return "TipoDocumento [id=" + this.getId() + ", glosa=" + glosa + "]";
 	}
 	
 	

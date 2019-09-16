@@ -1,28 +1,27 @@
 package com.example.dto;
 
-
-
+import java.util.Calendar;
 
 public class PersonaDto implements _DTOEntity {
 	private Long id;
-	private int tipoDocumentoId;
-	private String glosaTipoDocumento;
-	private String firstName;
-	private String lastName;
-	private String phoneNumber;
+	private int documento;
+	private String nombres;
+	private String apellidos;
+	private String sexo;
 	private String email;
+	private Calendar fechaNacimiento;
 	
 	
-	public PersonaDto(Long id, int tipoDocumentoId, String glosaTipoDocumento, String firstName, String lastName,
-			String phoneNumber, String email) {
+	public PersonaDto(Long id, int documento, String nombres, String apellidos,String sexo,
+			String email, Calendar fechaNacimiento) {
 		super();
 		this.id = id;
-		this.tipoDocumentoId = tipoDocumentoId;
-		this.glosaTipoDocumento = glosaTipoDocumento;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phoneNumber = phoneNumber;
+		this.documento = documento;
+		this.nombres = nombres;
+		this.apellidos = apellidos;
+		this.sexo = sexo;
 		this.email = email;
+		this.fechaNacimiento=fechaNacimiento;
 	}
 	
 	public PersonaDto() {
@@ -35,36 +34,46 @@ public class PersonaDto implements _DTOEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public int getTipoDocumentoId() {
-		return tipoDocumentoId;
+	public int getDocumento() {
+		return documento;
 	}
-	public void setTipoDocumentoId(int tipoDocumentoId) {
-		this.tipoDocumentoId = tipoDocumentoId;
+	public void setDocumento(int documento) {
+		this.documento = documento;
 	}
-	public String getGlosaTipoDocumento() {
-		return glosaTipoDocumento;
+	
+	
+	public String getNombres() {
+		return nombres;
 	}
-	public void setGlosaTipoDocumento(String glosaTipoDocumento) {
-		this.glosaTipoDocumento = glosaTipoDocumento;
+	
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
 	}
-	public String getFirstName() {
-		return firstName;
+	
+	public String getApellidos() {
+		return apellidos;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
 	}
-	public String getLastName() {
-		return lastName;
+	
+	public String getSexo() {
+		return sexo;
 	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
-	public String getPhoneNumber() {
-		return phoneNumber;
+	
+	public Calendar getFechaNacimiento() {
+		return fechaNacimiento;
 	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+
+	public void setFechaNacimiento(Calendar fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
+
 	public String getEmail() {
 		return email;
 	}
