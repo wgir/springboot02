@@ -43,6 +43,8 @@ public class _BaseEntity {
    	@Column(name = "activo")
    	@ColumnPosition(position = 34)
     private boolean  activo;
+   	
+   	private String ip;
    
 	
    
@@ -88,6 +90,14 @@ public class _BaseEntity {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 	
 }

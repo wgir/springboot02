@@ -37,6 +37,7 @@ public class Persona extends _BaseEntity {
 	@ColumnPosition(position = 1) 
 	private int documento;
 	
+	
 	@Column(name = "nombres")
 	@ColumnPosition(position = 2)
 	private String nombres;
