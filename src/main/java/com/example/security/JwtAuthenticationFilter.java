@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.example.constantes.SecurityConstants;
-import com.example.dto.UserCredentials;
+import com.example.dto.UsuarioDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.FilterChain;
@@ -38,9 +38,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
 		//En caso que no se quier tomar de los parametros de la url(get) sino del contenido del post
-    	UserCredentials creds=null;
+    	UsuarioDto creds=null;
     	try {
-			creds = new ObjectMapper().readValue(request.getInputStream(), UserCredentials.class);
+			creds = new ObjectMapper().readValue(request.getInputStream(), UsuarioDto.class);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

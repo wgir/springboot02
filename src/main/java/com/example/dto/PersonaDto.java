@@ -3,7 +3,7 @@ package com.example.dto;
 import java.util.Calendar;
 
 public class PersonaDto implements _DTOEntity {
-	private Long id;
+	private Long id=(long) 0;
 	private int documento;
 	private String nombres;
 	private String apellidos;

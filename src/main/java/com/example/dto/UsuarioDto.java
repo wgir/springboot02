@@ -1,14 +1,14 @@
 package com.example.dto;
 
-public class UserCredentials {
+public class UsuarioDto {
  private String userName;
  private String password;
  
- public UserCredentials()
+ public UsuarioDto()
  {
 	 
  }
-public UserCredentials(String userName, String password) {
+public UsuarioDto(String userName, String password) {
 	super();
 	this.userName = userName;
 	this.password = password;
