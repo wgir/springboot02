@@ -1,7 +1,9 @@
-package com.example.dto;
+package com.example.dto.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.dto.Respuesta;
 
 public class UsuarioDtoResponse extends Respuesta {
 	List<UsuarioDto> listaDto;

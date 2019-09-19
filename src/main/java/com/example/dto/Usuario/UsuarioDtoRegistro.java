@@ -1,17 +1,17 @@
-package com.example.dto;
+package com.example.dto.Usuario;
 
-public class RegistroDto {
+public class UsuarioDtoRegistro {
 	
 	private String nombre;
-	private String userName;
+	private String userName; //email
 	
  
-	public RegistroDto()
+	public UsuarioDtoRegistro()
 	{
 		 
 	}
 	 
-	public RegistroDto(String userName, String nombre) {
+	public UsuarioDtoRegistro(String userName, String nombre) {
 		super();
 		this.userName = userName;
 		this.nombre=nombre;

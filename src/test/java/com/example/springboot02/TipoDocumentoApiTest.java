@@ -24,7 +24,7 @@ import com.example.constantes.Constantes;
 @ContextConfiguration(classes = SpringBoot02Application.class) 
 //@TestPropertySource(value={"classpath:application.properties"})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@Order(value = 0)
+@Order(value = 99)
 public class TipoDocumentoApiTest {
 	
 	 @Autowired

@@ -1,5 +1,7 @@
 package com.example.springboot02;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,25 +19,36 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.dto.PerfilDto;
 import com.example.dto.PerfilDtoResponse;
+import com.example.dto.PersonaDto;
+import com.example.dto.PersonaDtoResponse;
+import com.example.dto.Respuesta;
 import com.example.dto.TipoDocumentoDto;
 import com.example.dto.TipoDocumentoDtoResponse;
+import com.example.dto.Usuario.UsuarioDtoRegistro;
+import com.example.dto.Usuario.UsuarioDtoResponse;
+import com.example.entities.Pers_Persona;
+import com.example.repository.PersonaRepository;
 import com.example.constantes.Constantes;
 
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = SpringBoot02Application.class) 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@Order(value = 0)
-public class PerfilApiTest {
+@Order(value = 4)
+public class UsuarioApiTest {
 	
 	 @Autowired
 	 private TestRestTemplate restTemplate;
 
+	 @Autowired
+	 private PersonaRepository personaRepository;
+
+	 
 	 @LocalServerPort
 	 private int port;
 
 	 private String getRootUrl() {
-	    return "http://localhost:" + port + "/api/perfil";
+	    return "http://localhost:" + port + "/api/usuario";
 	 }
 
 	 HttpHeaders headers = new HttpHeaders();
@@ -54,26 +67,28 @@ public class PerfilApiTest {
 	 
 	 
 	 @Test
-	 public void testAdd() {
+	 public void testAddAdministrador() {
 		 	//se consultan todos los items
-		 	ResponseEntity<PerfilDtoResponse> response = restTemplate.getForEntity(getRootUrl() , PerfilDtoResponse.class);
+		    //ResponseEntity<PersonaDtoResponse> response = restTemplate.getForEntity("http://localhost:" + port + "/api/personas", PersonaDtoResponse.class);
+		 	//List<Pers_Persona> lista=personaRepository.findAll();
+		 	//int cant=lista.size()+1;
+		 	ResponseEntity<UsuarioDtoResponse> response = restTemplate.getForEntity(getRootUrl() , UsuarioDtoResponse.class);
 		 	int cant=response.getBody().getListaDto().size()+1;
-		 	PerfilDto obj = new PerfilDto(0,"glosa "+Integer.toString(cant),true);
+		 	UsuarioDtoRegistro obj = new UsuarioDtoRegistro("correo"+Integer.toString(cant)+"@gmail.com","nombre "+Integer.toString(cant));
 		 	//se crea un nuevo item con contador+1
-		    response = restTemplate.postForEntity(getRootUrl(), obj, PerfilDtoResponse.class);
-		    Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
-	        Assert.assertEquals(Constantes.OK, response.getBody().getEstado());
-	        Assert.assertEquals(obj.getGlosa(),response.getBody().getListaDto().get(0).getGlosa());
-	        //se consulta el utlimo iten ingresado
-	        obj.setId(response.getBody().getListaDto().get(0).getId());
-		 	response = restTemplate.getForEntity(getRootUrl()+"/"+obj.getId(), PerfilDtoResponse.class);
-		    Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
-		    //se valida que el ultimo item ingresado sea el mismo que se envio
-	        Assert.assertEquals(obj.getGlosa(),response.getBody().getListaDto().get(0).getGlosa());
-        
+		 	
+		 	ResponseEntity<Respuesta> responseRegistro = restTemplate.postForEntity(getRootUrl()+"/registrarAdministrador", obj, Respuesta.class);
+		    Assert.assertEquals(HttpStatus.OK,responseRegistro.getStatusCode());
+	        Assert.assertEquals(Constantes.OK, responseRegistro.getBody().getEstado());
+	
+	        //se prueba que un correo no valido no pase
+		 	obj = new UsuarioDtoRegistro("correo","nombre "+Integer.toString(cant+1));
+		 	responseRegistro = restTemplate.postForEntity(getRootUrl()+"/registrarAdministrador", obj, Respuesta.class);
+		    Assert.assertEquals(HttpStatus.OK,responseRegistro.getStatusCode());
+	        Assert.assertEquals(Constantes.ERROR_VALIDACION, responseRegistro.getBody().getEstado());
 	 }
 	 
-	 
+	 /*
 	 @Test
 	 public void testUpdate() {
 		 	ResponseEntity<PerfilDtoResponse> response = restTemplate.getForEntity(getRootUrl(), PerfilDtoResponse.class);
@@ -88,6 +103,6 @@ public class PerfilApiTest {
 		    Assert.assertEquals(Constantes.OK, response.getBody().getEstado());
 	        Assert.assertEquals(modificado,response.getBody().getListaDto().get(0).getGlosa());
 	 }
-	
+	*/
 
 }

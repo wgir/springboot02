@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.eclipse.persistence.annotations.Customizer;
@@ -29,25 +30,38 @@ public class Segu_Usuario extends _BaseEntity{
 	@ColumnPosition(position = 0) 
 	private int idUsuario;
 	
-	
-	@Column(name = "userName", length = 50)
+ 	
+ 	@OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "idPersona", nullable = false)
+	private Pers_Persona persona;
+ 	
+ 	
+	@Column(name = "userName", length = 100)
 	@ColumnPosition(position = 1) 
 	private String userName;
 	
-	@Column(name = "password", length = 50)
+	@Column(name = "password", length = 500)
 	@ColumnPosition(position = 2) 
 	private String password;
 	
-	
-	
-	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idPerfil", nullable = false)
-	private Segu_Perfil segu_perfil;
+    //@OnDelete(action = OnDeleteAction.CASCADE)
+    //@JoinColumn(name = "idPerfil", nullable = false)
+	private Segu_Perfil perfil;
 	
 	public Segu_Usuario()
 	{
 	 
 	}
+	
+	public Segu_Usuario(String userName, String password) 
+	{
+		super();
+		this.userName = userName;
+		this.password = password;
+	}
+	
 	public int getIdUsuario() {
 		return idUsuario;
 	}
@@ -55,11 +69,15 @@ public class Segu_Usuario extends _BaseEntity{
 		this.idUsuario = idUsuario;
 	}
 	
-	public Segu_Usuario(String userName, String password) {
-	super();
-	this.userName = userName;
-	this.password = password;
+	
+	public Pers_Persona getPersona() {
+		return persona;
 	}
+	public void setPersona(Pers_Persona persona) {
+		this.persona = persona;
+	}
+	
+	
 
 	public String getUserName() {
 		return userName;
@@ -75,10 +93,10 @@ public class Segu_Usuario extends _BaseEntity{
 	}
 	
 	public Segu_Perfil getPerfil() {
-		return segu_perfil;
+		return perfil;
 	}
-	public void setPerfil(Segu_Perfil segu_perfil) {
-		this.segu_perfil = segu_perfil;
+	public void setPerfil(Segu_Perfil perfil) {
+		this.perfil = perfil;
 	}
  
 }

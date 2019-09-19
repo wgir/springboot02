@@ -51,20 +51,18 @@ public class Segu_Perfil extends _BaseEntity implements java.io.Serializable {
 	private String glosa;
 	
 		
-	@OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "segu_perfil")
-   	private Segu_Usuario segu_usuario;
+	//@OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "perfil")
+   	//private Segu_Usuario usuario;
 	
    
 	public Segu_Perfil() {
 	}
 
 	
-
-	public Segu_Perfil(String glosa, Segu_Usuario segu_usuario) {
+	public Segu_Perfil(int idPerfil,String glosa) {
+		this.idPerfil=idPerfil;
 		this.glosa = glosa;
-		this.segu_usuario = segu_usuario;
 	}
-	
 	
 	public int getIdPerfil() {
 		return idPerfil;
@@ -87,14 +85,14 @@ public class Segu_Perfil extends _BaseEntity implements java.io.Serializable {
 	}
 	
 	   
-	
+	/*
 	public Segu_Usuario getUsuario() {
-		return this.segu_usuario;
+		return this.usuario;
 	}
 
-	public void setUsuario(Segu_Usuario segu_usuario) {
-		this.segu_usuario = segu_usuario;
-	}
+	public void setUsuario(Segu_Usuario usuario) {
+		this.usuario = usuario;
+	}*/
 
 	@Override
 	public String toString() {

@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 public class PersonaDto implements _DTOEntity {
 	private Long id=(long) 0;
-	private int documento;
+	private Integer documento;
 	private String nombres;
 	private String apellidos;
 	private String sexo;
@@ -12,7 +12,7 @@ public class PersonaDto implements _DTOEntity {
 	private Calendar fechaNacimiento;
 	
 	
-	public PersonaDto(Long id, int documento, String nombres, String apellidos,String sexo,
+	public PersonaDto(Long id, Integer documento, String nombres, String apellidos,String sexo,
 			String email, Calendar fechaNacimiento) {
 		super();
 		this.id = id;
@@ -21,7 +21,8 @@ public class PersonaDto implements _DTOEntity {
 		this.apellidos = apellidos;
 		this.sexo = sexo;
 		this.email = email;
-		this.fechaNacimiento=fechaNacimiento;
+		if(fechaNacimiento!=null)
+			this.fechaNacimiento=fechaNacimiento;
 	}
 	
 	public PersonaDto() {
@@ -37,7 +38,7 @@ public class PersonaDto implements _DTOEntity {
 	public int getDocumento() {
 		return documento;
 	}
-	public void setDocumento(int documento) {
+	public void setDocumento(Integer documento) {
 		this.documento = documento;
 	}
 	

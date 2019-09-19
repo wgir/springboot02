@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.example.constantes.SecurityConstants;
-import com.example.dto.UsuarioDto;
+import com.example.dto.Usuario.UsuarioDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.FilterChain;

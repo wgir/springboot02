@@ -4,25 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonaDtoResponse extends Respuesta {
-	List<PersonaDto> personaDto;
+	List<PersonaDto> listaDto;
 	
 	public PersonaDtoResponse(int estado, String mensaje) {
 		super(estado, mensaje);
 		// TODO Auto-generated constructor stub
-		personaDto=new ArrayList<PersonaDto>();
+		listaDto=new ArrayList<PersonaDto>();
 	}
 
-	public List<PersonaDto> getPersonaDto() {
-		return personaDto;
+	public List<PersonaDto> getListaDto() {
+		return listaDto;
 	}
 
-	public void setPersonaDto(List<PersonaDto> personaDto) {
-		this.personaDto = personaDto;
+	public void setListaDto(List<PersonaDto> personaDto) {
+		this.listaDto = personaDto;
 	}
 	
-	public void addPersonaDto(PersonaDto personaDto)
+	public void addListaDto(PersonaDto personaDto)
 	{
-		this.personaDto.add(personaDto);
+		this.listaDto.add(personaDto);
 	}
 	
 	

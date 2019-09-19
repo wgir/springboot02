@@ -1,22 +1,28 @@
-package com.example.dto;
+package com.example.dto.Usuario;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+
 import com.example.entities.*;
 import com.example.repository.*;
 
 @Component
-public class UsuarioDtoValidator implements Validator {
+public class UsuarioDtoRegistroValidator implements Validator {
 
 	@Autowired
 	UsuarioRepository repository;
-
+	String regex = "^(.+)@(.+)$";
+	Pattern pattern = Pattern.compile(regex);
+	
 	@Override
 	public boolean supports(Class<?> clazz) {
-	return PerfilDto.class.isAssignableFrom(clazz);
+	return UsuarioDtoRegistro.class.isAssignableFrom(clazz);
 	}
 
 	@Override
@@ -24,12 +30,12 @@ public class UsuarioDtoValidator implements Validator {
 	{
 	//	if (errors.getErrorCount() == 0) 
 		//{
-		PerfilDto  param = (PerfilDto)target;
+		UsuarioDtoRegistro  param = (UsuarioDtoRegistro)target;
 		List<Segu_Usuario> lista=repository.findAll();
-		if(param.getId()==0)
-			if(lista.stream().filter(o->o.getUserName().toUpperCase().trim().equals(param.getGlosa().toUpperCase().trim())).count()>0)
+		if(lista.stream().filter(o->o.getUserName().toUpperCase().trim().equals(param.getUserName().toUpperCase().trim())).count()>0)
 				errors.reject("100","Ya existe un usuario con el mismo correo");
-			
+		Matcher matcher = pattern.matcher(param.getUserName());
+		if(matcher.matches()==false)
+			errors.reject("100","Email no valido");
 	}
-
 }

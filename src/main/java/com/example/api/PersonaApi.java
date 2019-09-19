@@ -59,7 +59,7 @@ public class PersonaApi {
 
 		PersonaDtoResponse respuesta = service.update(id, obj);
 
-		if (respuesta.getPersonaDto().size()==0) {
+		if (respuesta.getListaDto().size()==0) {
 			return new ResponseEntity<PersonaDtoResponse>(respuesta, HttpStatus.NOT_FOUND);
 		}
 
