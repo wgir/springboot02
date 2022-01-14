@@ -52,6 +52,7 @@ id | amount | description | originAccount | destinationAccount | taxCollected
 ## Run application <a name="run"></a>
 
 `/funds-transfer$ mvn clean install`
+
 `/funds-transfer$ mvn spring-boot:run`
 
 
