@@ -38,7 +38,7 @@ The application just hand two tables:
 1.Account: Table to store accounts  
 
 id | accountNumber | currency | balance
-------------- | -------------|------------
+------------- | -------------|------------|------------
 1  | 12345 | USD | 100
 
 
