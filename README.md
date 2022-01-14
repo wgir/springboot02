@@ -45,7 +45,7 @@ id | accountNumber | currency | balance
 2.Transfer: Table to store transfer between accounts. 
 
 id | amount | description | originAccount | destinationAccount | taxCollected
-------------- | -------------|------------|------------
+------------- | -------------|------------|------------|------------|------------
 1  | 50 | transfer | 12345 | 54321 | 0.1
 
 
